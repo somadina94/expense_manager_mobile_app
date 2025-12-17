@@ -25,6 +25,11 @@ import ExpenseDetail from './templates/expense-detail';
 import AddExpense from './templates/add-expense';
 import UpdateExpenseForm from './templates/update-expense-form';
 import SearchExpenseForm from './templates/search-expense-form';
+import AllBudgets from './organisms/all-budgets';
+import AddBudget from './templates/add-budget';
+import BudgetDetail from './templates/budget-detail';
+import UpdateBudget from './templates/update-budget-form';
+import SearchBudgetForm from './templates/search-budget-form';
 
 export {
   IconButton,
@@ -54,4 +59,9 @@ export {
   AddExpense,
   UpdateExpenseForm,
   SearchExpenseForm,
+  AllBudgets,
+  AddBudget,
+  BudgetDetail,
+  UpdateBudget,
+  SearchBudgetForm,
 };

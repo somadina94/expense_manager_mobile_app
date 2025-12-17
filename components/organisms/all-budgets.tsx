@@ -1,49 +1,49 @@
 import { ScrollView, Alert, View } from 'react-native';
-import { expenseService } from 'services';
-import ExpenseItem from 'components/molecules/expense-item';
-import NoResult from 'components/atoms/no-result';
+import { budgetService } from 'services';
 import { useState, useEffect } from 'react';
 import { useAppSelector, RootState, AuthState } from 'store';
-import { Expense } from 'types';
+import { Budget } from 'types';
 import { useIsFocused } from '@react-navigation/native';
 import Loading from 'components/molecules/loading';
+import BudgetItem from 'components/molecules/budget-item';
+import NoResult from 'components/atoms/no-result';
 
-export default function AllExpenses() {
+export default function AllBudgets() {
   const { access_token } = useAppSelector((state: RootState) => state.auth) as AuthState;
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [budgets, setBudgets] = useState<Budget[]>([]);
   const isFocused = useIsFocused();
   const [isLoading, setIsloading] = useState<boolean>(false);
   useEffect(() => {
-    const fetchExpenses = async () => {
+    const fetchBudgets = async () => {
       setIsloading(true);
-      const response = await expenseService.getExpenses(access_token as string);
+      const response = await budgetService.getBudgets(access_token as string);
       if (response.status === 200) {
-        setExpenses(response.data.data.expenses);
+        setBudgets(response.data.data.budgets);
       } else {
         Alert.alert(response.message);
       }
       setIsloading(false);
     };
-    fetchExpenses();
+    fetchBudgets();
   }, [access_token, isFocused]);
 
-  const sortedExpenses = expenses.sort(
-    (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  const sortedBudgets = budgets
+    .sort((a: any, b: any) => b.year - a.year)
+    .sort((a: any, b: any) => b.month - a.month);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  if (expenses.length === 0) {
+  if (budgets.length === 0) {
     return <NoResult />;
   }
 
   return (
     <ScrollView>
       <View className="gap-4 p-4">
-        {sortedExpenses.map((item: Expense) => (
-          <ExpenseItem key={item._id} item={item} />
+        {sortedBudgets.map((budget: Budget) => (
+          <BudgetItem key={budget._id} budget={budget} />
         ))}
       </View>
     </ScrollView>

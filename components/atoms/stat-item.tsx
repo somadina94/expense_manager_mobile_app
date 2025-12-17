@@ -13,8 +13,8 @@ export default function StatItem({
     <View
       className="items-center justify-center gap-2 rounded-md py-4 shadow-sm"
       style={{ backgroundColor: color }}>
-      <Text className="text-md font-semibold text-text-light dark:text-text-dark">{title}</Text>
-      <Text className="text-md text-gray-300 dark:text-text-dark">{value}</Text>
+      <Text className="text-md font-semibold text-gray-900">{title.toUpperCase()}</Text>
+      <Text className="text-md text-gray-300">{value}</Text>
     </View>
   );
 }
