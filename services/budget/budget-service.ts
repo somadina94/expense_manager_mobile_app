@@ -22,13 +22,13 @@ class BudgetService {
       return { message: 'An unexpected error occurred. Please try again.' };
     }
   }
-  async getBudgets(token: string, startDate?: Date, endDate?: Date) {
+  async getBudgets(token: string, month?: number, year?: number) {
     try {
       const response = await axiosInstance.get('/', {
         headers: { Authorization: `Bearer ${token}` },
         params: {
-          startDate,
-          endDate,
+          month,
+          year,
         },
       });
       return { data: response.data, status: response.status, message: response.data.message };

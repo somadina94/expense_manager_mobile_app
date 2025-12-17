@@ -4,15 +4,22 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAppSelector, AuthState, RootState } from 'store';
 import { budgetService, expenseService, noteService } from 'services';
 import { Budget, Expense, Note } from 'types';
+import StatItem from 'components/atoms/stat-item';
+import { formatAmount } from 'utils/helpers';
+import { useIsFocused } from '@react-navigation/native';
+import Loading from 'components/molecules/loading';
 
 export default function Dashboard() {
   const { user, access_token } = useAppSelector((state: RootState) => state.auth) as AuthState;
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
+  const isFocused = useIsFocused();
+  const [isLoading, setIsloading] = useState<boolean>(false);
 
   useEffect(() => {
     if (access_token) {
+      setIsloading(true);
       budgetService.getBudgets(access_token).then((res: any) => {
         setBudgets(res.data.data.budgets as Budget[]);
       });
@@ -21,9 +28,10 @@ export default function Dashboard() {
       });
       noteService.getNotes(access_token).then((res: any) => {
         setNotes(res.data.data.notes as Note[]);
+        setIsloading(false);
       });
     }
-  }, [access_token]);
+  }, [access_token, isFocused]);
 
   let currentMonthExpenses: Expense[] = [];
   let lastMonthExpenses: Expense[] = [];
@@ -58,6 +66,10 @@ export default function Dashboard() {
   const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
   const totalNotes = notes.length;
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <View className="flex-1">
       <View className="h-[112px] w-full flex-row items-end justify-between bg-primary-500 p-4 dark:bg-background-dark-secondary">
@@ -76,49 +88,51 @@ export default function Dashboard() {
       </View>
       <ScrollView>
         <View className="flex gap-6 p-4">
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#434E78] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Current month budget
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${currentMonthBudgets.reduce((acc, budget) => acc + budget.amount, 0).toFixed(2)}`}</Text>
-          </View>
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#607B8F] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Current month expenses
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${currentMonthExpenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2)}`}</Text>
-          </View>
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#44444E] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Last month budget
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${lastMonthBudgets.reduce((acc, budget) => acc + budget.amount, 0).toFixed(2)}`}</Text>
-          </View>
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#522546] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Last month expenses
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${lastMonthExpenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2)}`}</Text>
-          </View>
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#92487A] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Total budget
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${totalBudget.toFixed(2)}`}</Text>
-          </View>
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#018790] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              Total expenses
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{`${user?.currency}${totalExpenses.toFixed(2)}`}</Text>
-          </View>
+          <StatItem
+            title="Current month budget"
+            value={`${user?.currency} ${formatAmount(
+              currentMonthBudgets.reduce((acc, budget) => acc + budget.amount, 0)
+            )}`}
+            color="#1E3A8A"
+          />
 
-          <View className="elevation-lg items-center justify-center gap-2 rounded-md bg-[#016B61] py-4">
-            <Text className="text-md font-semibold text-text-light dark:text-text-dark">
-              All notes
-            </Text>
-            <Text className="text-md text-gray-300 dark:text-text-dark">{totalNotes}</Text>
-          </View>
+          <StatItem
+            title="Current month expenses"
+            value={`${user?.currency} ${formatAmount(
+              currentMonthExpenses.reduce((acc, expense) => acc + expense.amount, 0)
+            )}`}
+            color="#2563EB"
+          />
+
+          <StatItem
+            title="Last month budget"
+            value={`${user?.currency} ${formatAmount(
+              lastMonthBudgets.reduce((acc, budget) => acc + budget.amount, 0)
+            )}`}
+            color="#334155"
+          />
+
+          <StatItem
+            title="Last month expenses"
+            value={`${user?.currency} ${formatAmount(
+              lastMonthExpenses.reduce((acc, expense) => acc + expense.amount, 0)
+            )}`}
+            color="#d9480f"
+          />
+
+          <StatItem
+            title="Total budget"
+            value={`${user?.currency} ${formatAmount(totalBudget)}`}
+            color="#7C3AED"
+          />
+
+          <StatItem
+            title="Total expenses"
+            value={`${user?.currency} ${formatAmount(totalExpenses)}`}
+            color="#0F766E"
+          />
+
+          <StatItem title="All notes" value={`${totalNotes}`} color="#065F46" />
         </View>
       </ScrollView>
     </View>
