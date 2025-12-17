@@ -27,6 +27,11 @@ import {
   BudgetDetailScreen,
   UpdateBudgetScreen,
   SearchBudgetsScreen,
+  AllNotesScreen,
+  AddNoteScreen,
+  NoteDetailScreen,
+  SearchNoteScreen,
+  UpdateNoteScreen,
 } from 'screens';
 import {
   store,
@@ -105,6 +110,11 @@ function NotesStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Overview" component={NotesScreen} />
+      <Stack.Screen name="AllNotes" component={AllNotesScreen} />
+      <Stack.Screen name="AddNote" component={AddNoteScreen} />
+      <Stack.Screen name="NoteDetail" component={NoteDetailScreen} />
+      <Stack.Screen name="SearchNote" component={SearchNoteScreen} />
+      <Stack.Screen name="UpdateNote" component={UpdateNoteScreen} />
     </Stack.Navigator>
   );
 }

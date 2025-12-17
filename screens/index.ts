@@ -18,6 +18,11 @@ import AddBudgetScreen from './budgets/add-budget-screen';
 import BudgetDetailScreen from './budgets/budget-detail-screen';
 import UpdateBudgetScreen from './budgets/update-budget-screen';
 import SearchBudgetsScreen from './budgets/search-budgets-screen';
+import AllNotesScreen from './notes/all-notes-screen';
+import AddNoteScreen from './notes/add-note-screen';
+import NoteDetailScreen from './notes/note-detail-screen';
+import SearchNoteScreen from './notes/search-note-screen';
+import UpdateNoteScreen from './notes/update-note-screen';
 
 export {
   DashboardScreen,
@@ -40,4 +45,9 @@ export {
   BudgetDetailScreen,
   UpdateBudgetScreen,
   SearchBudgetsScreen,
+  AllNotesScreen,
+  AddNoteScreen,
+  NoteDetailScreen,
+  SearchNoteScreen,
+  UpdateNoteScreen,
 };

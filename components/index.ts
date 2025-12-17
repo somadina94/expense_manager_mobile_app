@@ -30,6 +30,11 @@ import AddBudget from './templates/add-budget';
 import BudgetDetail from './templates/budget-detail';
 import UpdateBudget from './templates/update-budget-form';
 import SearchBudgetForm from './templates/search-budget-form';
+import AllNotes from './organisms/all-notes';
+import AddNote from './templates/add-note';
+import NoteDetail from './templates/note-detail';
+import SearchNoteForm from './templates/search-note-form';
+import UpdateNote from './templates/update-note-form';
 
 export {
   IconButton,
@@ -64,4 +69,9 @@ export {
   BudgetDetail,
   UpdateBudget,
   SearchBudgetForm,
+  AllNotes,
+  AddNote,
+  NoteDetail,
+  UpdateNote,
+  SearchNoteForm,
 };

@@ -42,3 +42,11 @@ export function getMonthOptions(locale: string = 'en-US'): MonthOption[] {
     value: `${month}`,
   }));
 }
+
+export function trimToLength(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return text.slice(0, maxLength - 3) + '...';
+}
