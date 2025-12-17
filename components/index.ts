@@ -16,6 +16,15 @@ import Select from './atoms/select';
 import Textarea from './atoms/textarea';
 import ForgotPasswordForm from './molecules/forgot-password-form';
 import ResetPasswordForm from './molecules/reset-password-form';
+import Budgets from './templates/budgets';
+import Notes from './templates/notes';
+import Expenses from './templates/expenses';
+import TabHeader from './molecules/tab-header';
+import AllExpenses from './organisms/all-expenses';
+import ExpenseDetail from './templates/expense-detail';
+import AddExpense from './templates/add-expense';
+import UpdateExpenseForm from './templates/update-expense-form';
+import SearchExpenseForm from './templates/search-expense-form';
 
 export {
   IconButton,
@@ -36,4 +45,13 @@ export {
   Textarea,
   ForgotPasswordForm,
   ResetPasswordForm,
+  Notes,
+  Expenses,
+  Budgets,
+  TabHeader,
+  AllExpenses,
+  ExpenseDetail,
+  AddExpense,
+  UpdateExpenseForm,
+  SearchExpenseForm,
 };

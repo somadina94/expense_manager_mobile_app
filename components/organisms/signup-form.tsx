@@ -132,7 +132,7 @@ export default function SignupForm() {
       const response = await authService.signup(data);
       if (response.status === 201) {
         dispatch(login(response.data.token));
-        dispatch(setUser(response.data.user));
+        dispatch(setUser(response.data.data.user));
       }
     } catch (error) {
       Alert.alert('Error', (error as Error).message || 'An unexpected error occurred');
