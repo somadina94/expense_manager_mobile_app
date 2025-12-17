@@ -75,7 +75,7 @@ export default function UpdateBudget() {
       access_token as string
     );
 
-    if (res.status === 201) {
+    if (res.status === 200) {
       Alert.alert('Success', res.message, [
         {
           text: 'OK',

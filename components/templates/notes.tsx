@@ -7,7 +7,7 @@ export default function Notes() {
       <View className="gap-4 p-6">
         <TabMenuItem title="All Notes" destination="AllNotes" icon="document-outline" />
         <TabMenuItem title="Add Note" destination="AddNote" icon="add" />
-        <TabMenuItem title="Search Notes" destination="SearchNotes" icon="search-outline" />
+        <TabMenuItem title="Search Notes" destination="SearchNote" icon="search-outline" />
       </View>
     </ScrollView>
   );
