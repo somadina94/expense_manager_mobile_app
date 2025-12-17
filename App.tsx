@@ -14,6 +14,14 @@ import {
   SettingsScreen,
   ForgotPasswordScreen,
   ResetPasswordScreen,
+  ExpensesScreen,
+  BudgetsScreen,
+  NotesScreen,
+  AllExpensesScreen,
+  ExpenseDetailScreen,
+  AddExpenseScreen,
+  UpdateExpenseScreen,
+  SearchExpenseScreen,
 } from 'screens';
 import {
   store,
@@ -57,7 +65,36 @@ function DashboardStack() {
 function SettingsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="overview" component={SettingsScreen} />
+      <Stack.Screen name="Overview" component={SettingsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function ExpensesStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Overview" component={ExpensesScreen} />
+      <Stack.Screen name="AllExpenses" component={AllExpensesScreen} />
+      <Stack.Screen name="ExpenseDetail" component={ExpenseDetailScreen} />
+      <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
+      <Stack.Screen name="UpdateExpense" component={UpdateExpenseScreen} />
+      <Stack.Screen name="SearchExpense" component={SearchExpenseScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function BudgetsStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Overview" component={BudgetsScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function NotesStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Overview" component={NotesScreen} />
     </Stack.Navigator>
   );
 }
@@ -68,16 +105,43 @@ function AuthenticatedTab() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: colorScheme === 'dark' ? '#1A120B' : '#004B90' },
+        tabBarStyle: { backgroundColor: colorScheme === 'dark' ? '#0D0A09' : '#1F4E79' },
         tabBarActiveTintColor: '#9CCD16',
-        tabBarInactiveTintColor: colorScheme === 'dark' ? '#FFFFFF' : '#2F2E38',
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#FFFFFF' : '#FFFFFF',
       }}>
       <Tab.Screen
         name="Home"
         component={DashboardStack}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" color={color} size={size} />
+            <Ionicons name="stats-chart-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Expenses"
+        component={ExpensesStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="cash-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Budgets"
+        component={BudgetsStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="wallet-outline" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notes"
+        component={NotesStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="document-outline" color={color} size={size} />
           ),
         }}
       />
@@ -105,7 +169,7 @@ function Navigation() {
       try {
         const response = await authService.getMe(access_token as string);
         if (response.status === 200) {
-          dispatch(setUser(response.data as User));
+          dispatch(setUser(response.data.data.user as User));
         } else {
           dispatch(logout());
         }

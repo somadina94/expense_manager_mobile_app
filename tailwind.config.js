@@ -8,8 +8,8 @@ module.exports = {
       colors: {
         primary: {
           300: '#8FCAFF',
-          500: '#0061B9',
-          900: '#004B90',
+          500: '#1F4E79',
+          900: '#1F4E79',
         },
         secondary: {
           300: '#D1C5D6',
@@ -29,8 +29,8 @@ module.exports = {
         },
         background: {
           dark: {
-            primary: '#0E0A07',
-            secondary: '#1A120B',
+            primary: '#080707',
+            secondary: '#0D0A09',
           },
           light: {
             primary: '#F3F3F3',

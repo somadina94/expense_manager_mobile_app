@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react';
 
-const useInput = (validateValue: (value: string) => boolean) => {
-  const [enteredValue, setEnteredValue] = useState<string | undefined>('');
+const useDateInput = (validateValue: (value: Date | undefined) => boolean) => {
+  const [enteredValue, setEnteredValue] = useState<Date | undefined>(undefined);
   const [isTouched, setIsTouched] = useState<boolean>(false);
 
-  const enteredValueIsValid = validateValue(enteredValue || '');
+  const enteredValueIsValid = validateValue(enteredValue);
   const enteredValueIsInvalid = !enteredValueIsValid && isTouched;
 
-  const valueInputChangedHandler = useCallback((text: string | undefined) => {
-    setEnteredValue(text);
+  const valueInputChangedHandler = useCallback((date: Date | undefined) => {
+    setEnteredValue(date);
   }, []);
 
   const valueInputBlurHandler = () => {
@@ -16,7 +16,7 @@ const useInput = (validateValue: (value: string) => boolean) => {
   };
 
   const reset = () => {
-    setEnteredValue('');
+    setEnteredValue(undefined);
     setIsTouched(false);
   };
 
@@ -30,4 +30,4 @@ const useInput = (validateValue: (value: string) => boolean) => {
   };
 };
 
-export default useInput;
+export default useDateInput;

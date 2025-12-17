@@ -45,7 +45,7 @@ export default function LoginForm() {
       const response = await authService.login(data);
       if (response.status === 200) {
         dispatch(login(response.data.token));
-        dispatch(setUser(response.data.user));
+        dispatch(setUser(response.data.data.user));
       } else {
         Alert.alert('Error', response.message);
       }
@@ -83,7 +83,7 @@ export default function LoginForm() {
             error={passwordHasError ? 'Password is required' : ''}
           />
           <Text
-            className="text-body-sm text-primary-500  my-2"
+            className="my-2 text-body-sm  text-primary-500"
             onPress={() => navigation.navigate('ForgotPassword' as never)}>
             Forgot password?
           </Text>
@@ -97,10 +97,10 @@ export default function LoginForm() {
           />
         </View>
         <View className="mb-24 mt-6 items-center justify-end">
-          <Text className="text-body-sm text-text-light dark:text-text-dark text-center">
+          <Text className="text-center text-body-sm text-text-light dark:text-text-dark">
             Don&apos;t have an account?{' '}
             <Text
-              className="text-primary-500 text-center"
+              className="text-center text-primary-500"
               onPress={() => navigation.navigate('Signup' as never)}>
               Sign up
             </Text>

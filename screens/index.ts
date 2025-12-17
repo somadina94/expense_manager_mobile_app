@@ -5,6 +5,14 @@ import WelcomeScreen from './general/welcome';
 import SettingsScreen from './general/settings-screen';
 import ForgotPasswordScreen from './auth/forgot-password';
 import ResetPasswordScreen from './auth/reset-password';
+import ExpensesScreen from './general/expenses-screen';
+import BudgetsScreen from './general/budgets-screen';
+import NotesScreen from './general/notes-screen';
+import AllExpensesScreen from './expenses/all-expenses';
+import ExpenseDetailScreen from './expenses/expense-detail-screen';
+import AddExpenseScreen from './expenses/add-expense-screen';
+import UpdateExpenseScreen from './expenses/update-expense-screen';
+import SearchExpenseScreen from './expenses/search-expense-screen';
 
 export {
   DashboardScreen,
@@ -14,4 +22,12 @@ export {
   SettingsScreen,
   ForgotPasswordScreen,
   ResetPasswordScreen,
+  ExpensesScreen,
+  BudgetsScreen,
+  NotesScreen,
+  AllExpensesScreen,
+  ExpenseDetailScreen,
+  AddExpenseScreen,
+  UpdateExpenseScreen,
+  SearchExpenseScreen,
 };
