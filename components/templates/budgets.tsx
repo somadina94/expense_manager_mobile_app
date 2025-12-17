@@ -7,7 +7,7 @@ export default function Budgets() {
       <View className="gap-4 p-6">
         <TabMenuItem title="All Budgets" destination="AllBudgets" icon="wallet-outline" />
         <TabMenuItem title="Add Budget" destination="AddBudget" icon="add" />
-        <TabMenuItem title="Search Budgets" destination="SearchBudgets" icon="search-outline" />
+        <TabMenuItem title="Search Budgets" destination="SearchBudget" icon="search-outline" />
       </View>
     </ScrollView>
   );

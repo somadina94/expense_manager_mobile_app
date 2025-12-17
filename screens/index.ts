@@ -13,6 +13,11 @@ import ExpenseDetailScreen from './expenses/expense-detail-screen';
 import AddExpenseScreen from './expenses/add-expense-screen';
 import UpdateExpenseScreen from './expenses/update-expense-screen';
 import SearchExpenseScreen from './expenses/search-expense-screen';
+import AllBudgetsScreen from './budgets/all-budgets-screen';
+import AddBudgetScreen from './budgets/add-budget-screen';
+import BudgetDetailScreen from './budgets/budget-detail-screen';
+import UpdateBudgetScreen from './budgets/update-budget-screen';
+import SearchBudgetsScreen from './budgets/search-budgets-screen';
 
 export {
   DashboardScreen,
@@ -30,4 +35,9 @@ export {
   AddExpenseScreen,
   UpdateExpenseScreen,
   SearchExpenseScreen,
+  AllBudgetsScreen,
+  AddBudgetScreen,
+  BudgetDetailScreen,
+  UpdateBudgetScreen,
+  SearchBudgetsScreen,
 };

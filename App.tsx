@@ -22,6 +22,11 @@ import {
   AddExpenseScreen,
   UpdateExpenseScreen,
   SearchExpenseScreen,
+  AllBudgetsScreen,
+  AddBudgetScreen,
+  BudgetDetailScreen,
+  UpdateBudgetScreen,
+  SearchBudgetsScreen,
 } from 'screens';
 import {
   store,
@@ -87,6 +92,11 @@ function BudgetsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Overview" component={BudgetsScreen} />
+      <Stack.Screen name="AllBudgets" component={AllBudgetsScreen} />
+      <Stack.Screen name="AddBudget" component={AddBudgetScreen} />
+      <Stack.Screen name="BudgetDetail" component={BudgetDetailScreen} />
+      <Stack.Screen name="UpdateBudget" component={UpdateBudgetScreen} />
+      <Stack.Screen name="SearchBudget" component={SearchBudgetsScreen} />
     </Stack.Navigator>
   );
 }

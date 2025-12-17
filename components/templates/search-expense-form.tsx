@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, ScrollView, View, Text } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 import { useAppSelector, RootState, AuthState } from 'store';
 import { expenseService } from 'services';
 import useDateInput from 'hooks/use-date-input';
@@ -8,6 +8,7 @@ import DateInput from 'components/atoms/date-input';
 import IconButton from 'components/atoms/icon-button';
 import ExpenseItem from 'components/molecules/expense-item';
 import { Expense } from 'types';
+import NoResult from 'components/atoms/no-result';
 
 export default function SearchExpenseForm() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -86,11 +87,7 @@ export default function SearchExpenseForm() {
       </View>
       <ScrollView className="mt-4 h-[360px] rounded-lg bg-background-light-secondary p-2 shadow-sm dark:bg-background-dark-secondary">
         <View className="gap-2">
-          {sortedExpenses.length === 0 && (
-            <View className="items-center justify-center  p-4">
-              <Text>No results</Text>
-            </View>
-          )}
+          {sortedExpenses.length === 0 && <NoResult />}
           {sortedExpenses.length > 0 &&
             sortedExpenses.map((expense: Expense) => (
               <ExpenseItem key={expense._id} item={expense} />
