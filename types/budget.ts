@@ -1,5 +1,5 @@
 export interface Budget {
-  userId: string;
+  userId?: string;
   amount: number;
   month: number;
   year: number;
