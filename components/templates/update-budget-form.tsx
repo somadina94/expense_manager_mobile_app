@@ -44,16 +44,10 @@ export default function UpdateBudget() {
   } = useInput((value: string) => value.trim().length > 0);
 
   useEffect(() => {
-    amountInputChangedHandler(`${budget.amount}`);
-    yearInputChangedHandler(`${budget.month}`);
-    monthInputChangedHandler(`${budget.year}`);
-  }, [
-    amountInputChangedHandler,
-    monthInputChangedHandler,
-    yearInputChangedHandler,
-    access_token,
-    budget,
-  ]);
+    amountInputChangedHandler(budget.amount.toString());
+    monthInputChangedHandler(budget.month.toString());
+    yearInputChangedHandler(budget.year.toString());
+  }, [amountInputChangedHandler, monthInputChangedHandler, yearInputChangedHandler, budget]);
 
   let formIsValid = false;
   if (yearInputIsValid && amountInputIsValid && monthInputIsValid) {
@@ -114,7 +108,7 @@ export default function UpdateBudget() {
             value={monthInput}
             onValueChange={monthInputChangedHandler}
             onBlur={monthInputBlurHandler}
-            error={monthInputHasError ? 'Amount is required' : ''}
+            error={monthInputHasError ? 'Month is required' : ''}
             options={getMonthOptions()}
           />
           <Select
@@ -123,11 +117,15 @@ export default function UpdateBudget() {
             value={yearInput}
             onValueChange={yearInputChangedHandler}
             onBlur={yearInputBlurHandler}
-            error={yearInputHasError ? 'Amount is required' : ''}
+            error={yearInputHasError ? 'Year is required' : ''}
             options={[
               {
                 label: new Date().getFullYear().toString(),
                 value: new Date().getFullYear().toString(),
+              },
+              {
+                label: (+new Date().getFullYear().toString() + 1).toString(),
+                value: (+new Date().getFullYear().toString() + 1).toString(),
               },
             ]}
           />

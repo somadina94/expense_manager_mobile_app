@@ -15,7 +15,7 @@ export default function BudgetItem({ budget }: BudgetItemProps) {
   return (
     <Pressable
       onPress={() => (navigation as any).navigate('BudgetDetail', { budget: budget as Budget })}
-      className="rounded-lg bg-background-light-secondary shadow-sm active:opacity-50 dark:bg-background-dark-secondary">
+      className="flex-1 rounded-lg bg-background-light-secondary shadow-sm active:opacity-50 dark:bg-background-dark-secondary">
       <View className="flex-row p-4">
         <Text className="flex-1 text-left text-sm text-gray-900 dark:text-neutral">
           {user?.currency} {formatAmount(budget.amount)}

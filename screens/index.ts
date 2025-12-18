@@ -23,6 +23,8 @@ import AddNoteScreen from './notes/add-note-screen';
 import NoteDetailScreen from './notes/note-detail-screen';
 import SearchNoteScreen from './notes/search-note-screen';
 import UpdateNoteScreen from './notes/update-note-screen';
+import UpdateMeScreen from './auth/update-me-screen';
+import UpdatePasswordScreen from './auth/update-password-screen';
 
 export {
   DashboardScreen,
@@ -50,4 +52,6 @@ export {
   NoteDetailScreen,
   SearchNoteScreen,
   UpdateNoteScreen,
+  UpdateMeScreen,
+  UpdatePasswordScreen,
 };

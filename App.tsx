@@ -32,6 +32,8 @@ import {
   NoteDetailScreen,
   SearchNoteScreen,
   UpdateNoteScreen,
+  UpdateMeScreen,
+  UpdatePasswordScreen,
 } from 'screens';
 import {
   store,
@@ -76,6 +78,8 @@ function SettingsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Overview" component={SettingsScreen} />
+      <Stack.Screen name="UpdateMe" component={UpdateMeScreen} />
+      <Stack.Screen name="UpdatePassword" component={UpdatePasswordScreen} />
     </Stack.Navigator>
   );
 }
