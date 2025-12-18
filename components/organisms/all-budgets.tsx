@@ -40,7 +40,7 @@ export default function AllBudgets() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView className="flex-1">
       <View className="gap-4 p-4">
         {sortedBudgets.map((budget: Budget) => (
           <BudgetItem key={budget._id} budget={budget} />

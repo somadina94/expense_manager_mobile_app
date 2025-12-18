@@ -14,8 +14,8 @@ export default function SettingsScreen() {
 
   const dispatch = useAppDispatch();
   return (
-    <View className="h-[112px] w-full flex-row items-end justify-between bg-primary-500 p-4 dark:bg-background-dark-secondary">
-      <View className="mt-16 flex-row items-center px-4">
+    <View className="flex-1 bg-background-light-primary dark:bg-background-dark-primary">
+      <View className="h-[112px] flex-row items-end bg-primary-500 px-4 pb-4 dark:bg-background-dark-secondary">
         <Ionicons
           name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
           size={24}

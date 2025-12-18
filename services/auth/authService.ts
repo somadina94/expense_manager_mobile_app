@@ -1,10 +1,11 @@
 import axios, { AxiosError } from 'axios';
+import { User } from 'types';
 
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL!;
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL + 'users/',
-  timeout: 30000,
+  timeout: 90000,
 });
 
 class AuthService {
@@ -53,7 +54,7 @@ class AuthService {
           'Content-Type': 'application/json',
         },
       });
-      return { data: response.data, status: response.status };
+      return { data: response.data, status: response.status, message: response.data.message };
     } catch (error) {
       if (error && error instanceof AxiosError) {
         return { message: error.response?.data.message };
@@ -101,7 +102,7 @@ class AuthService {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      return { data: response.data, status: response.status };
+      return { data: response.data, status: response.status, message: response.data.message };
     } catch (error) {
       if (error && error instanceof AxiosError) {
         return { message: error.response?.data.message };
@@ -112,14 +113,43 @@ class AuthService {
 
   async updatePassword(
     token: string,
-    data: { passowrdCurrent: string; password: string; passwordConfirm: string }
+    data: { passwordCurrent: string; password: string; passwordConfirm: string }
   ) {
     try {
       const response = await axiosInstance.patch('updatePassword', data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      return { data: response.data, status: response.status };
+      return { data: response.data, status: response.status, message: response.data.message };
     } catch (error) {
+      if (error && error instanceof AxiosError) {
+        return { message: error.response?.data.message };
+      }
+      return { message: 'An unexpected error occurred. Please try again.' };
+    }
+  }
+
+  async updateMe(token: string, data: User) {
+    try {
+      const response = await axiosInstance.patch('updateMe', data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return { data: response.data, status: response.status, message: response.data.message };
+    } catch (error) {
+      if (error && error instanceof AxiosError) {
+        return { message: error.response?.data.message };
+      }
+      return { message: 'An unexpected error occurred. Please try again.' };
+    }
+  }
+
+  async deleteMe(token: string) {
+    try {
+      const response = await axiosInstance.delete(`me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return { data: response.data, status: response.status, message: response.data.message };
+    } catch (error) {
+      console.log(error);
       if (error && error instanceof AxiosError) {
         return { message: error.response?.data.message };
       }

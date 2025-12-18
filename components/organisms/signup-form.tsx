@@ -133,6 +133,8 @@ export default function SignupForm() {
       if (response.status === 201) {
         dispatch(login(response.data.token));
         dispatch(setUser(response.data.data.user));
+      } else {
+        Alert.alert('Sign up error', response.message);
       }
     } catch (error) {
       Alert.alert('Error', (error as Error).message || 'An unexpected error occurred');
