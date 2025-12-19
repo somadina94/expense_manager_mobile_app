@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769352353673",
+    "project_id": "fir-723a7",
+    "storage_bucket": "fir-723a7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769352353673:android:1b68ae4aaaaf375b544358",
+        "android_client_info": {
+          "package_name": "com.jahbyte.extrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769352353673-dk6ue0cq98t1adel62cvu2dhcgc62oii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw_9atTBlcw_NJ-ijctc6JKaKUBj1sVNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769352353673-dk6ue0cq98t1adel62cvu2dhcgc62oii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

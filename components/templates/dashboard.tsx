@@ -81,9 +81,9 @@ export default function Dashboard() {
         </View>
         <Pressable className="relative">
           <Ionicons name="notifications" size={24} color="white" />
-          <View className="text-md absolute right-0 top-[-12] h-6 w-6 flex-1 items-center justify-center rounded-full bg-red-500 text-center text-neutral">
+          {/* <View className="text-md absolute right-0 top-[-12] h-6 w-6 flex-1 items-center justify-center rounded-full bg-red-500 text-center text-neutral">
             <Text className="text-sm text-neutral">33</Text>
-          </View>
+          </View> */}
         </Pressable>
       </View>
       <ScrollView>

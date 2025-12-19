@@ -50,6 +50,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { useEffect } from 'react';
 import { authService } from 'services';
 import { User } from 'types';
+import { subscribePushNotificationsAsync } from 'utils/subscribe-notification';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -125,6 +126,23 @@ function NotesStack() {
 
 function AuthenticatedTab() {
   const colorScheme = useColorScheme();
+  const { access_token, user } = useAppSelector((state: RootState) => state.auth) as AuthState;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const initPush = async () => {
+      const token = await subscribePushNotificationsAsync();
+      if (token && user?.expoPushToken !== token) {
+        const res = await authService.updatePushToken(access_token as string, token);
+        if (res.status === 200) {
+        } else {
+          dispatch(logout());
+        }
+      }
+    };
+
+    initPush();
+  }, [access_token, dispatch, user]);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -188,7 +206,6 @@ function Navigation() {
   ) as AuthState;
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (!access_token) return;
     const fetchUser = async () => {
       try {
         const response = await authService.getMe(access_token as string);
@@ -203,6 +220,7 @@ function Navigation() {
     };
     fetchUser();
   }, [access_token, dispatch]);
+
   return (
     <NavigationContainer>
       {!isLoggedIn && <AuthStack />}

@@ -94,6 +94,7 @@ class AuthService {
   }
 
   async updatePushToken(token: string, expoPushToken: string) {
+    console.log(expoPushToken);
     try {
       const response = await axiosInstance.patch(
         'expoPushToken',
