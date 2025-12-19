@@ -1,38 +1,37 @@
 {
-  "expo": {
-    "name": "Expenses",
-    "slug": "Expenses",
-    "version": "1.0.0",
-
-    "web": {
-      "favicon": "./assets/favicon.png"
+  "android": {
+    "adaptiveIcon": {
+      "backgroundColor": "#ffffff",
+      "foregroundImage": "./assets/adaptive-icon.png"
     },
-
-    "experiments": {
-      "tsconfigPaths": true
-    },
-
-    "plugins": [],
-
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-
-    "userInterfaceStyle": "automatic",
-
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+    "package": "com.jahbyte.extrack",
+    "googleServicesFile": "./google-services.json",
+    "versionCode": 3
+  },
+  "extra": {
+    "eas": {
+      "projectId": "c90ee2a8-380e-4c5c-ab67-60769d5d1e64"
     }
+  },
+  "plugins": ["expo-notifications"],
+  "icon": "./assets/icon.png",
+  "ios": {
+    "buildNumber": "1.0.0",
+    "supportsTablet": true
+  },
+  "name": "ExTrack",
+  "orientation": "portrait",
+  "platforms": ["android", "ios"],
+  "sdkVersion": "54.0.0",
+  "slug": "ExT",
+  "splash": {
+    "backgroundColor": "#ffffff",
+    "image": "./assets/splash.png",
+    "resizeMode": "contain"
+  },
+  "userInterfaceStyle": "automatic",
+  "version": "1.0.0",
+  "web": {
+    "favicon": "./assets/favicon.png"
   }
 }
