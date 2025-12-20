@@ -50,3 +50,41 @@ export function trimToLength(text: string, maxLength: number): string {
 
   return text.slice(0, maxLength - 3) + '...';
 }
+
+export function formatRelativeDateTime(date: Date): string {
+  const now = new Date();
+
+  const isSameDay = (a: Date, b: Date) =>
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate();
+
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+
+  const formatTime = (d: Date) => {
+    let hours = d.getHours();
+    const minutes = d.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes}${ampm}`;
+  };
+
+  const time = formatTime(date);
+
+  if (isSameDay(date, now)) {
+    return `Today at ${time}`;
+  }
+
+  if (isSameDay(date, yesterday)) {
+    return `Yesterday at ${time}`;
+  }
+
+  const formattedDate = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  return `${formattedDate} at ${time}`;
+}

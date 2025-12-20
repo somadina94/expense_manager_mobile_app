@@ -94,7 +94,6 @@ class AuthService {
   }
 
   async updatePushToken(token: string, expoPushToken: string) {
-    console.log(expoPushToken);
     try {
       const response = await axiosInstance.patch(
         'expoPushToken',
@@ -106,6 +105,7 @@ class AuthService {
       return { data: response.data, status: response.status, message: response.data.message };
     } catch (error) {
       if (error && error instanceof AxiosError) {
+        console.log(error);
         return { message: error.response?.data.message };
       }
       return { message: 'An unexpected error occurred. Please try again.' };

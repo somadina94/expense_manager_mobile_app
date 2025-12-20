@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+fir-723a7-firebase-adminsdk-fbsvc-e9a53195ef.json
 
 
 *.env

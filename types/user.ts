@@ -4,7 +4,7 @@ export interface User {
   email: string;
   role?: string;
   createdAt?: Date;
-  expoPushToken?: string;
+  expoPushToken?: string[];
   country: string;
   currency: string;
 }

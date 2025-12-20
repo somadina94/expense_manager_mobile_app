@@ -105,6 +105,7 @@ export default function AddNote() {
             onChangeText={dateInputChangedHandler}
             onBlur={dateInputBlurHandler}
             error={dateInputHasError ? 'Reminder is required' : ''}
+            mode="datetime"
           />
           <IconButton
             title="ADD"
