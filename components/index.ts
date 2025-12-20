@@ -37,6 +37,8 @@ import SearchNoteForm from './templates/search-note-form';
 import UpdateNote from './templates/update-note-form';
 import UpdateMe from './organisms/update-me';
 import UpdatePassword from './organisms/update-password';
+import AllNotifications from './organisms/all-notifications';
+import NotificationDetail from './templates/notification-detail';
 
 export {
   IconButton,
@@ -78,4 +80,6 @@ export {
   SearchNoteForm,
   UpdateMe,
   UpdatePassword,
+  AllNotifications,
+  NotificationDetail,
 };

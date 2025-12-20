@@ -25,6 +25,8 @@ import SearchNoteScreen from './notes/search-note-screen';
 import UpdateNoteScreen from './notes/update-note-screen';
 import UpdateMeScreen from './auth/update-me-screen';
 import UpdatePasswordScreen from './auth/update-password-screen';
+import NotificationScreen from './notifications/notification-screen';
+import NotificationDetailScreen from './notifications/notification-detail-screen';
 
 export {
   DashboardScreen,
@@ -54,4 +56,6 @@ export {
   UpdateNoteScreen,
   UpdateMeScreen,
   UpdatePasswordScreen,
+  NotificationScreen,
+  NotificationDetailScreen,
 };

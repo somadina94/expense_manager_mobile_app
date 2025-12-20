@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAppSelector, AuthState, RootState } from 'store';
-import { budgetService, expenseService, noteService } from 'services';
-import { Budget, Expense, Note } from 'types';
+import { budgetService, expenseService, noteService, notificationService } from 'services';
+import { Budget, Expense, Note, Notification } from 'types';
 import StatItem from 'components/atoms/stat-item';
 import { formatAmount } from 'utils/helpers';
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import Loading from 'components/molecules/loading';
 
 export default function Dashboard() {
@@ -14,8 +14,10 @@ export default function Dashboard() {
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const isFocused = useIsFocused();
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (access_token) {
@@ -25,6 +27,9 @@ export default function Dashboard() {
       });
       expenseService.getExpenses(access_token).then((res: any) => {
         setExpenses(res.data.data.expenses as Expense[]);
+      });
+      notificationService.getNotifications(access_token).then((res: any) => {
+        setNotifications(res.data.data.notifications as Notification[]);
       });
       noteService.getNotes(access_token).then((res: any) => {
         setNotes(res.data.data.notes as Note[]);
@@ -37,6 +42,7 @@ export default function Dashboard() {
   let lastMonthExpenses: Expense[] = [];
   let currentMonthBudgets: Budget[] = [];
   let lastMonthBudgets: Budget[] = [];
+  let unreadNotifications: Notification[] = [];
 
   if (expenses.length > 0) {
     currentMonthExpenses = expenses.filter(
@@ -62,6 +68,10 @@ export default function Dashboard() {
     );
   }
 
+  if (notifications.length > 0) {
+    unreadNotifications = notifications.filter((notification) => notification.read === false);
+  }
+
   const totalBudget = budgets.reduce((acc, budget) => acc + budget.amount, 0);
   const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
   const totalNotes = notes.length;
@@ -79,11 +89,15 @@ export default function Dashboard() {
             Hi, {user?.name.split(' ')[0].toUpperCase()}
           </Text>
         </View>
-        <Pressable className="relative">
+        <Pressable
+          className="relative"
+          onPress={() => (navigation as any).navigate('Notifications')}>
           <Ionicons name="notifications" size={24} color="white" />
-          {/* <View className="text-md absolute right-0 top-[-12] h-6 w-6 flex-1 items-center justify-center rounded-full bg-red-500 text-center text-neutral">
-            <Text className="text-sm text-neutral">33</Text>
-          </View> */}
+          {unreadNotifications.length > 0 && (
+            <View className="text-md absolute right-0 top-[-12] h-6 w-6 flex-1 items-center justify-center rounded-full bg-red-500 text-center text-neutral">
+              <Text className="text-sm text-neutral">{unreadNotifications.length}</Text>
+            </View>
+          )}
         </Pressable>
       </View>
       <ScrollView>

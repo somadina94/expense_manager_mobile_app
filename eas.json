@@ -13,13 +13,15 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://expenses.jahbyte.com/api/v1/",
-        "EXPO_PUBLIC_PROJECT_ID": "c90ee2a8-380e-4c5c-ab67-60769d5d1e64"
+        "EXPO_PUBLIC_API_BASE_URL": "https://expenses.jahbyte.com/api/v1/"
       },
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_API_BASE_URL": "https://expenses.jahbyte.com/api/v1/"
+      }
     }
   },
   "submit": {

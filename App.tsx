@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ActivityIndicator, Alert, useColorScheme } from 'react-native';
+import * as Notifications from 'expo-notifications';
 
 import './global.css';
 import {
@@ -34,6 +35,8 @@ import {
   UpdateNoteScreen,
   UpdateMeScreen,
   UpdatePasswordScreen,
+  NotificationScreen,
+  NotificationDetailScreen,
 } from 'screens';
 import {
   store,
@@ -71,6 +74,8 @@ function DashboardStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
+      <Stack.Screen name="Notifications" component={NotificationScreen} />
+      <Stack.Screen name="NotificationDetail" component={NotificationDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -128,21 +133,42 @@ function AuthenticatedTab() {
   const colorScheme = useColorScheme();
   const { access_token, user } = useAppSelector((state: RootState) => state.auth) as AuthState;
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const initPush = async () => {
       const token = await subscribePushNotificationsAsync();
-      if (token && user?.expoPushToken !== token) {
-        const res = await authService.updatePushToken(access_token as string, token);
-        if (res.status === 200) {
-        } else {
-          dispatch(logout());
-        }
+      let tokenInUser: boolean = false;
+      if (token) {
+        tokenInUser = user?.expoPushToken?.includes(token) ? true : false;
+      }
+      if (token && !tokenInUser) {
+        await authService.updatePushToken(access_token as string, token);
       }
     };
 
     initPush();
   }, [access_token, dispatch, user]);
+
+  useEffect(() => {
+    const foregroundSub = Notifications.addNotificationReceivedListener((notification) => {
+      console.log('Foreground notification received:', notification);
+      (navigation as any).navigate('Home');
+      (navigation as any).navigate('Notifications');
+    });
+
+    const responseSub = Notifications.addNotificationResponseReceivedListener((response) => {
+      console.log('Notification tapped / interacted:', response);
+      (navigation as any).navigate('Home');
+      (navigation as any).navigate('Notifications');
+    });
+
+    return () => {
+      foregroundSub.remove();
+      responseSub.remove();
+    };
+  }, [navigation]);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -228,6 +254,16 @@ function Navigation() {
     </NavigationContainer>
   );
 }
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 export default function App() {
   return (
