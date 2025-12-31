@@ -37,6 +37,8 @@ import {
   UpdatePasswordScreen,
   NotificationScreen,
   NotificationDetailScreen,
+  PrivacyPolicyScreen,
+  TermsAndConditionsScreen,
 } from 'screens';
 import {
   store,
@@ -66,6 +68,8 @@ function AuthStack() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
       <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
+      <Stack.Screen name="TermsAndConditions" component={TermsAndConditionsScreen} />
     </Stack.Navigator>
   );
 }

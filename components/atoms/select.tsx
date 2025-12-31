@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export interface SelectOption {
   label: string;
@@ -44,6 +45,7 @@ export default function Select({
   onBlur,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const selectedOption = options.find((option) => option.value === value);
 
@@ -53,7 +55,7 @@ export default function Select({
     onBlur?.();
   };
 
-  // Only apply w-full if containerClassName doesn't already have width/flex classes
+  // Only apply w-full if containerClassName doesn't already include width/flex
   const hasWidthOrFlex = /(w-|flex-|flex\s)/.test(containerClassName);
   const containerClass = hasWidthOrFlex ? containerClassName : `${containerClassName} w-full`;
 
@@ -65,12 +67,13 @@ export default function Select({
           {label}
         </Text>
       )}
+
       <TouchableOpacity
         onPress={() => !disabled && setIsOpen(true)}
         disabled={disabled}
         className={`
           w-full flex-row items-center justify-between rounded-lg border bg-neutral px-4 py-3
-          text-text-light 
+          text-text-light
           dark:bg-background-dark-secondary dark:text-text-dark
           ${error ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'}
           ${disabled ? 'opacity-50' : ''}
@@ -82,6 +85,7 @@ export default function Select({
           }`}>
           {selectedOption ? selectedOption.label : placeholder}
         </Text>
+
         <Ionicons
           name={isOpen ? 'chevron-up' : 'chevron-down'}
           size={20}
@@ -99,7 +103,10 @@ export default function Select({
         <TouchableWithoutFeedback onPress={() => setIsOpen(false)}>
           <View className="flex-1 bg-black/50">
             <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-              <View className="absolute bottom-0 left-0 right-0 max-h-[50%] rounded-t-3xl bg-neutral dark:bg-background-dark-secondary">
+              <View
+                className="absolute bottom-0 left-0 right-0 max-h-[60%] rounded-t-3xl bg-neutral dark:bg-background-dark-secondary"
+                style={{ paddingBottom: insets.bottom }}>
+                {/* Header */}
                 <View className="border-b border-gray-300 px-4 py-3 dark:border-gray-700">
                   <View className="flex-row items-center justify-between">
                     <Text className="text-heading-md text-text-light dark:text-text-dark">
@@ -110,11 +117,18 @@ export default function Select({
                     </TouchableOpacity>
                   </View>
                 </View>
+
+                {/* Options */}
                 <FlatList
                   data={options}
                   keyExtractor={(item) => String(item.value)}
+                  keyboardDismissMode="on-drag"
+                  contentContainerStyle={{
+                    paddingBottom: insets.bottom + 16,
+                  }}
                   renderItem={({ item }) => {
                     const isSelected = item.value === value;
+
                     return (
                       <TouchableOpacity
                         onPress={() => handleSelect(item.value)}
@@ -132,6 +146,7 @@ export default function Select({
                             }`}>
                             {item.label}
                           </Text>
+
                           {isSelected && <Ionicons name="checkmark" size={20} color="#9CCD16" />}
                         </View>
                       </TouchableOpacity>

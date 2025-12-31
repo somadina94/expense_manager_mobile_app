@@ -1,6 +1,6 @@
 import { ScrollView, View, StyleSheet, Text } from 'react-native';
 
-function Privacy() {
+export default function PrivacyPolicyScreen() {
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.container}>
@@ -39,8 +39,9 @@ function Privacy() {
         <View style={styles.content}>
           <Text style={styles.title}>Data Retention</Text>
           <Text style={styles.text}>
-            We retain your personal information only for as long as necessary to provide the App's
-            services, comply with legal obligations, resolve disputes, and enforce our agreements.
+            We retain your personal information only for as long as necessary to provide the
+            App&apos;s services, comply with legal obligations, resolve disputes, and enforce our
+            agreements.
           </Text>
         </View>
         <View style={styles.content}>
@@ -69,7 +70,7 @@ function Privacy() {
           </Text>
         </View>
         <View style={styles.content}>
-          <Text style={styles.title}>Children's Privacy</Text>
+          <Text style={styles.title}>Children&apos;s Privacy</Text>
           <Text style={styles.text}>
             The App is not intended for use by individuals under the age of 13. We do not knowingly
             collect personal information from children under 13. If we discover that we have
@@ -80,8 +81,8 @@ function Privacy() {
           <Text style={styles.title}>Changes to This Privacy Policy</Text>
           <Text style={styles.text}>
             We may update this Privacy Policy from time to time. Any changes will be posted in the
-            App, and the "Last Updated" date will be revised. Your continued use of the App after
-            any changes constitutes your acceptance of the updated Privacy Policy.
+            App, and the &quot;Last Updated&quot; date will be revised. Your continued use of the
+            App after any changes constitutes your acceptance of the updated Privacy Policy.
           </Text>
         </View>
         <View style={styles.content}>
@@ -95,8 +96,6 @@ function Privacy() {
     </ScrollView>
   );
 }
-
-export default Privacy;
 
 const styles = StyleSheet.create({
   screen: {
