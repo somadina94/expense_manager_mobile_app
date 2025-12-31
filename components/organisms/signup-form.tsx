@@ -221,8 +221,7 @@ export default function SignupForm() {
                 <Text
                   className="text-primary-500"
                   onPress={() => {
-                    // Navigate to terms page
-                    console.log('Navigate to Terms');
+                    (navigation as any).navigate('TermsAndConditions');
                   }}>
                   Terms and Conditions
                 </Text>{' '}
@@ -230,8 +229,7 @@ export default function SignupForm() {
                 <Text
                   className="text-primary-500"
                   onPress={() => {
-                    // Navigate to privacy page
-                    console.log('Navigate to Privacy');
+                    (navigation as any).navigate('PrivacyPolicy');
                   }}>
                   Privacy Policy
                 </Text>

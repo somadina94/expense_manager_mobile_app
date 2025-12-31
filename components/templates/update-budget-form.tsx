@@ -120,12 +120,16 @@ export default function UpdateBudget() {
             error={yearInputHasError ? 'Year is required' : ''}
             options={[
               {
+                label: (new Date().getFullYear() + 1).toString(),
+                value: (new Date().getFullYear() + 1).toString(),
+              },
+              {
                 label: new Date().getFullYear().toString(),
                 value: new Date().getFullYear().toString(),
               },
               {
-                label: (+new Date().getFullYear().toString() + 1).toString(),
-                value: (+new Date().getFullYear().toString() + 1).toString(),
+                label: (new Date().getFullYear() + -1).toString(),
+                value: (new Date().getFullYear() + -1).toString(),
               },
             ]}
           />

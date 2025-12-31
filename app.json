@@ -19,7 +19,7 @@
     "buildNumber": "1.0.0",
     "supportsTablet": true
   },
-  "name": "ExTrack",
+  "name": "Planary",
   "orientation": "portrait",
   "platforms": ["android", "ios"],
   "sdkVersion": "54.0.0",

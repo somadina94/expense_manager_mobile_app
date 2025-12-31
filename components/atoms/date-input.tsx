@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, useColorScheme } from 'react-native';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -26,11 +26,13 @@ export default function DateInput({
   minimumDate,
   maximumDate,
 }: DateInputProps) {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
   const [showPicker, setShowPicker] = useState(false);
   const [timePicker, setTimePicker] = useState(false);
   const [tempDate, setTempDate] = useState<Date | undefined>(undefined);
 
-  // useEffect to open time picker safely after date picker closes
   useEffect(() => {
     if (Platform.OS === 'android' && timePicker && !showPicker) {
       setShowPicker(true);
@@ -41,18 +43,22 @@ export default function DateInput({
     ? mode === 'time'
       ? value.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       : mode === 'datetime'
-        ? `${value.toLocaleDateString()} ${value.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
+        ? `${value.toLocaleDateString()} ${value.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}`
         : value.toLocaleDateString()
     : placeholder;
+
+  const isPlaceholder = !value;
 
   const handleChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (Platform.OS === 'android') {
       if (mode === 'datetime') {
         if (!timePicker && selectedDate) {
-          // Save date and prepare time picker
           setTempDate(selectedDate);
-          setShowPicker(false); // close date picker first
-          setTimePicker(true); // time picker will open in useEffect
+          setShowPicker(false);
+          setTimePicker(true);
           return;
         }
         if (timePicker && selectedDate && tempDate) {
@@ -74,7 +80,6 @@ export default function DateInput({
         onChangeText?.(selectedDate);
         setShowPicker(false);
         onBlur?.();
-        return;
       }
     } else {
       if (selectedDate) {
@@ -83,19 +88,26 @@ export default function DateInput({
     }
   };
 
-  const openPicker = () => {
-    setShowPicker(true);
-  };
-
   return (
     <View className="w-full">
-      {label && <Text className="mb-2">{label}</Text>}
+      {label && <Text className="mb-2 text-sm text-gray-700 dark:text-gray-300">{label}</Text>}
 
       <TouchableOpacity
-        onPress={openPicker}
-        className="flex-row items-center justify-between rounded-lg border px-4 py-3">
-        <Text>{formattedValue}</Text>
-        <Ionicons name="calendar-outline" size={22} />
+        onPress={() => setShowPicker(true)}
+        className="
+          dark:border-neutral-700 flex-row items-center
+          justify-between rounded-lg border border-gray-300 bg-white
+          px-4 py-3
+          dark:border-gray-700 dark:bg-background-dark-secondary
+        ">
+        <Text
+          className={`text-sm ${
+            isPlaceholder ? 'text-gray-400 dark:text-gray-500' : 'text-gray-900 dark:text-gray-100'
+          }`}>
+          {formattedValue}
+        </Text>
+
+        <Ionicons name="calendar-outline" size={22} color={isDark ? '#e5e7eb' : '#111827'} />
       </TouchableOpacity>
 
       {showPicker && (
@@ -115,7 +127,7 @@ export default function DateInput({
         />
       )}
 
-      {error && <Text className="mt-1 text-red-500">{error}</Text>}
+      {error && <Text className="mt-1 text-xs text-red-500">{error}</Text>}
     </View>
   );
 }

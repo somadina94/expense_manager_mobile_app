@@ -27,6 +27,8 @@ import UpdateMeScreen from './auth/update-me-screen';
 import UpdatePasswordScreen from './auth/update-password-screen';
 import NotificationScreen from './notifications/notification-screen';
 import NotificationDetailScreen from './notifications/notification-detail-screen';
+import TermsAndConditionsScreen from './general/terms-and-conditions-screen';
+import PrivacyPolicyScreen from './general/privacy-policy-screen';
 
 export {
   DashboardScreen,
@@ -58,4 +60,6 @@ export {
   UpdatePasswordScreen,
   NotificationScreen,
   NotificationDetailScreen,
+  PrivacyPolicyScreen,
+  TermsAndConditionsScreen,
 };

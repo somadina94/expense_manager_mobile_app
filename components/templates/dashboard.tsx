@@ -81,7 +81,7 @@ export default function Dashboard() {
   }
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-background-light-primary dark:bg-background-dark-primary">
       <View className="h-[112px] w-full flex-row items-end justify-between bg-primary-500 p-4 dark:bg-background-dark-secondary">
         <View className="mt-16 flex-row items-end gap-2">
           <Ionicons name="person-outline" size={24} color="white" />
